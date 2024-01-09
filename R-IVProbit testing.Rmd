@@ -1,0 +1,54 @@
+---
+title: "Econ 191 Exploration"
+output: pdf_document
+date: "`r Sys.Date()`"
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## R Markdown
+
+This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see <http://rmarkdown.rstudio.com>.
+
+When you click the **Knit** button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document. You can embed an R code chunk like this:
+
+```{r cars}
+summary(cars)
+```
+
+## Including Plots
+
+You can also embed plots, for example:
+
+```{r pressure, echo=FALSE}
+plot(pressure)
+```
+
+Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
+
+```{r}
+library(ivprobit)
+```
+
+```{r}
+setwd("/Users/rohanjha/Documents/Cal/Econ_191/exploring_data")
+all_states_w_inflation <- read.csv("all_states_w_inflation.csv")
+all_states_w_inflation <- all_states_w_inflation[, -1]
+probit1 <- ivprobit(Wage_Increase_Indicator~Priv.Union.Members....+prop_rep+state_inf+state_inf_t+state_inf_nt+yr1995+yr1996+yr1997+yr1998+yr1999+yr2000+yr2001+yr2002+yr2003+yr2003+yr2005+yr2006+yr2007+yr2008+yr2009+yr2010+yr2011+yr2012+yr2013+yr2014+yr2015+yr2016+yr2017|change_prop_on_strike_indicator|Priv.Union.Members....+prop_rep+state_inf+instrument_calc+yr1995+yr1996+yr1997+yr1998+yr1999+yr2000+yr2001+yr2002+yr2003+yr2003+yr2005+yr2006+yr2007+yr2008+yr2009+yr2010+yr2011+yr2012+yr2013+yr2014+yr2015+yr2016+yr2017+state_inf_t+state_inf_nt,all_states_w_inflation)
+summary(probit1)
+```
+```{r}
+all_states_no_inflation <- read.csv("all_states_no_inflation.csv")
+all_states_no_inflation <- all_states_no_inflation[, -1]
+probit2 <- ivprobit(Wage_Increase_Indicator~Priv.Union.Members....+prop_rep+yr1995+yr1996+yr1997+yr1998+yr1999+yr2000+yr2001+yr2002+yr2003+yr2003+yr2005+yr2006+yr2007+yr2008+yr2009+yr2010+yr2011+yr2012+yr2013+yr2014+yr2015+yr2016+yr2017+yr2018+yr2019+yr2020|change_prop_on_strike_indicator|Priv.Union.Members....+prop_rep+instrument_calc+yr1995+yr1996+yr1997+yr1998+yr1999+yr2000+yr2001+yr2002+yr2003+yr2003+yr2005+yr2006+yr2007+yr2008+yr2009+yr2010+yr2011+yr2012+yr2013+yr2014+yr2015+yr2016+yr2017+yr2018+yr2019+yr2020,all_states_no_inflation)
+summary(probit2)
+```
+```{r}
+all_states_no_poli <- read.csv("all_states_no_poli.csv")
+all_states_no_poli <- all_states_no_poli[, -1]
+probit3 <- ivprobit(Wage_Increase_Indicator~Priv.Union.Members....+yr1995+yr1996+yr1997+yr1998+yr1999+yr2000+yr2001+yr2002+yr2003+yr2003+yr2005+yr2006+yr2007+yr2008+yr2009+yr2010+yr2011+yr2012+yr2013+yr2014+yr2015+yr2016+yr2017+yr2018+yr2019+yr2020|change_prop_on_strike_indicator|Priv.Union.Members....+instrument_calc+yr1995+yr1996+yr1997+yr1998+yr1999+yr2000+yr2001+yr2002+yr2003+yr2003+yr2005+yr2006+yr2007+yr2008+yr2009+yr2010+yr2011+yr2012+yr2013+yr2014+yr2015+yr2016+yr2017+yr2018+yr2019+yr2020,all_states_no_poli)
+summary(probit3)
+```
+

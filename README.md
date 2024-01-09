@@ -1,1 +1,1 @@
-# econ_191
+This repository contains all code and data files for my thesis in Economics 191: Topics in Economics Research. The final thesis can be viewed [here](https://drive.google.com/file/d/1BSe_AgGeOTk4YhJ9DtOGTHyhySMb2MBz/view?usp=sharing).
